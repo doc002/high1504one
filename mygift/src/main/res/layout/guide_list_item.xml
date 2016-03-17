@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guide_list_item_round"
+    android:padding="5dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/guide_list_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"
+        app:riv_corner_radius="10dip"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ig_marker_fresh" />
+
+    <TextView
+        android:id="@+id/guide_list_item_countbg_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/guide_list_item_gray"
+        android:drawablePadding="5dp"
+        android:drawableTop="@drawable/ic_action_compact_favourite_normal"
+        android:padding="5dp"
+        android:text="9898" />
+
+    <TextView
+        android:id="@+id/guide_list_item_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="这是标题" />
+
+
+</RelativeLayout>

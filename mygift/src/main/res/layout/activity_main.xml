@@ -3,14 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.administrator.mygift.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_line"></FrameLayout>
+
+    <View
+        android:id="@+id/main_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/main_rb_group"
+        android:background="#9D9F9F" />
+
+    <RadioGroup
+        android:id="@+id/main_rb_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/main_guide_rbt"
+        android:padding="5dp">
+
+        <RadioButton
+            android:id="@+id/main_guide_rbt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_guide_rb"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="指南"
+            android:textColor="#9D9F9F" />
+
+        <RadioButton
+            android:id="@+id/main_hot_rbt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_hot_rb"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="热门"
+            android:textColor="#9D9F9F" />
+
+        <RadioButton
+            android:id="@+id/main_category_rbt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_category_rb"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="分类"
+            android:textColor="#9D9F9F" />
+
+        <RadioButton
+            android:id="@+id/main_my_rbt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_my_rb"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="我的"
+            android:textColor="#9D9F9F" />
+    </RadioGroup>
 </RelativeLayout>
