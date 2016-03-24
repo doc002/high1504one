@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/category_top_view"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorAccent" />
+
+    <RadioGroup
+        android:id="@+id/category_top_rb"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_centerHorizontal="true"
+        android:checkedButton="@+id/category_strategy_rb"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/category_strategy_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/category_top_left_text"
+            android:button="@null"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="攻略"
+            android:textColor="@color/category_text_color" />
+
+        <RadioButton
+            android:id="@+id/category_gift_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/category_top_right_text"
+            android:button="@null"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="礼物"
+            android:textColor="@color/category_text_color" />
+    </RadioGroup>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_menu_search" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/category_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/category_top_view">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

@@ -7,42 +7,35 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.example.administrator.mygift.R;
+import com.example.administrator.mygift.adapter.HotGridAdapter;
+import com.example.administrator.mygift.bean.HotBean;
+import com.example.administrator.mygift.http.IOkCallBack;
+import com.example.administrator.mygift.http.OkHttpTool;
+import com.example.administrator.mygift.http.UrlConfig;
+import com.google.gson.Gson;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HotFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HotFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class HotFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     public HotFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HotFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HotFragment newInstance(String param1, String param2) {
         HotFragment fragment = new HotFragment();
         Bundle args = new Bundle();
@@ -61,18 +54,44 @@ public class HotFragment extends BaseFragment {
         }
     }
 
+    private View view;
+    private Context mContext;
+
+    @Bind(R.id.hot_gridview)
+    GridView hotGv;
+    private ArrayList<HotBean.HotEntity.ItemsEntity> itemsEntities = new ArrayList<>();
+    private HotGridAdapter hotGridAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hot, container, false);
+        view = inflater.inflate(R.layout.fragment_hot, container, false);
+        ButterKnife.bind(this,view);
+        mContext = getActivity();
+
+        initData();
+        bindAdapter();
+        setListener();
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void initData() {
+        OkHttpTool.okGet(UrlConfig.HOT_GRIDVIEW_URL, HotBean.class, new IOkCallBack<HotBean>() {
+            @Override
+            public void onSuccess(HotBean resultInfo) {
+                itemsEntities.addAll(resultInfo.getData().getItems());
+            }
+        },4);
+    }
+
+    private void bindAdapter() {
+        hotGridAdapter = new HotGridAdapter(mContext,itemsEntities);
+        hotGv.setAdapter(hotGridAdapter);
+    }
+
+    private void setListener() {
+
     }
 
     @Override

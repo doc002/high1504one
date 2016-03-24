@@ -1,15 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.HotFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/hot_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="热门" />
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="热门"/>
 
-</FrameLayout>
+   <GridView
+       android:layout_below="@+id/hot_view"
+       android:id="@+id/hot_gridview"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:numColumns="2"
+       android:padding="10dp"
+       android:horizontalSpacing="5dp"
+       android:verticalSpacing="5dp"/>
+    
+</RelativeLayout>

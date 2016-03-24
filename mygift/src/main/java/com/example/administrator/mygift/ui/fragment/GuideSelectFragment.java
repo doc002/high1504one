@@ -2,23 +2,29 @@ package com.example.administrator.mygift.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.example.administrator.mygift.R;
 import com.example.administrator.mygift.adapter.GuideExpandListAdapter;
+import com.example.administrator.mygift.adapter.GuideRecyclerAdapter;
 import com.example.administrator.mygift.bean.GuideBannerBean;
 import com.example.administrator.mygift.bean.GuideListBean;
+import com.example.administrator.mygift.bean.GuideRecyleBean;
 import com.example.administrator.mygift.http.IOkCallBack;
 import com.example.administrator.mygift.http.OkHttpTool;
 import com.example.administrator.mygift.http.UrlConfig;
 import com.example.administrator.mygift.tools.DateFormatTool;
-import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,8 +49,11 @@ public class GuideSelectFragment extends BaseFragment {
 
     private View view;
     private View headerView;
-    private ArrayList<View> headerViewList = new ArrayList<>();
+    private ArrayList<String> stringArrayList = new ArrayList<>();
+    private ArrayList<String> recyleStringList = new ArrayList<>();
     private HeaderViewHolder headerViewHolder;
+    private RecyclerView recyleView;
+    private GuideRecyclerAdapter recyclerAdapter;
     private Context mContext;
     private List<String> timeList = new ArrayList<>();
     private Map<String, List<GuideListBean.DataEntity.ItemsEntity>> mExpandDatas = new HashMap<>();
@@ -85,32 +94,59 @@ public class GuideSelectFragment extends BaseFragment {
     }
 
     private void setHeaderView() {
-        OkHttpTool.okGet(UrlConfig.GUIDE_SELECT_BANNER_URL, GuideBannerBean.class, new IOkCallBack() {
-            @Override
-            public void onSuccess(Object resultInfo) {
-
-            }
-        }, 4);
-        if (headerViewList == null) {
-        }
         headerView = LayoutInflater.from(mContext).inflate(R.layout.guide_list_header, null);
-        headerViewHolder = new HeaderViewHolder(headerView);
-        headerViewHolder.convenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return null;
-            }
-        }, headerViewList)
-                .setPageIndicator(new int[]{R.drawable.ic_page_indicator,
-                        R.drawable.ic_page_indicator_focused});
-        OkHttpTool.okGet(UrlConfig.GUIDE_SELECT_BANNER_URL,
-                GuideBannerBean.class, new IOkCallBack<GuideBannerBean>() {
-
+        OkHttpTool.okGet(UrlConfig.GUIDE_SELECT_BANNER_URL, GuideBannerBean.class,
+                new IOkCallBack<GuideBannerBean>() {
                     @Override
                     public void onSuccess(GuideBannerBean resultInfo) {
+                        int size = resultInfo.getData().getBanners().size();
+                        for (int i = 0; i < size; i++) {
+                            stringArrayList.add(resultInfo.getData().getBanners().get(i).getWebp_url());
+                        }
+                        headerViewHolder = new HeaderViewHolder(headerView);
+                        headerViewHolder.convenientBanner.setPages(new CBViewHolderCreator() {
+                            @Override
+                            public Object createHolder() {
+                                return new BannerViewHolder();
+                            }
+                        }, stringArrayList)
+                                .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
+                                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
 
                     }
                 }, 3);
+        OkHttpTool.okGet(UrlConfig.GUIDE_SELECT_HORIZENTAl_RECYLEVIEW_URL, GuideRecyleBean.class,
+                new IOkCallBack<GuideRecyleBean>() {
+                    @Override
+                    public void onSuccess(GuideRecyleBean resultInfo) {
+                        int size = resultInfo.getData().getSecondary_banners().size();
+                        for (int i = 0; i < size; i++) {
+                            recyleStringList.add(resultInfo.getData().getSecondary_banners().get(i).getImage_url());
+                        }
+                        recyclerAdapter.notifyDataSetChanged();
+                    }
+                }, 4);
+        recyleView = (RecyclerView) headerView.findViewById(R.id.guide_list_header_recyleview);
+        recyleView.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
+        recyclerAdapter = new GuideRecyclerAdapter(mContext, recyleStringList);
+        recyleView.setAdapter(recyclerAdapter);
+        expandableListView.addHeaderView(headerView);
+    }
+
+    class BannerViewHolder implements Holder<String> {
+        private ImageView bannerImg;
+
+        @Override
+        public View createView(Context context) {
+            bannerImg = new ImageView(context);
+            bannerImg.setScaleType(ImageView.ScaleType.FIT_XY);
+            return bannerImg;
+        }
+
+        @Override
+        public void UpdateUI(Context context, int position, String data) {
+            Picasso.with(context).load(data).into(bannerImg);
+        }
     }
 
     class HeaderViewHolder {
@@ -162,8 +198,6 @@ public class GuideSelectFragment extends BaseFragment {
     private void bindListViewAdapter() {
         expandListAdapter = new GuideExpandListAdapter(getActivity(), timeList, mExpandDatas);
         expandableListView.setAdapter(expandListAdapter);
-
-
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {

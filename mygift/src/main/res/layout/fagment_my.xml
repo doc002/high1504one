@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/my_top_framlayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_profile" />
+
+    <ImageView
+        android:id="@+id/my_scanner_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/my_setting_img"
+        android:padding="15dp"
+        android:src="@drawable/ic_toolkit_zebra_scanner" />
+
+    <ImageView
+        android:id="@+id/my_setting_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="15dp"
+        android:src="@drawable/me_settings" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:src="@drawable/icon_message" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/my_scanner_img"
+        android:layout_centerHorizontal="true"
+        android:drawablePadding="15dp"
+        android:drawableTop="@drawable/ig_profile_photo_default"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="未登录"
+        android:textColor="#fff" />
+
+    <RadioGroup
+        android:id="@+id/my_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_top_framlayout"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/icon_cart"
+            android:gravity="center_horizontal"
+            android:text="购物车"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/icon_order"
+            android:gravity="center_horizontal"
+            android:text="订单"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/icon_coupon"
+            android:gravity="center_horizontal"
+            android:text="礼券"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/icon_service"
+            android:gravity="center_horizontal"
+            android:text="客服"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <View
+        android:id="@+id/my_view_gray"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/my_radiogroup"
+        android:background="#eee" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/my_view_gray"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="礼物" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#eee" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="攻略" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:id="@+id/hot_item_cardview"
+        android:layout_width="180dp"
+        android:layout_height="240dp"
+        app:cardCornerRadius="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/hot_item_img"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:src="@mipmap/ic_launcher"/>
+            <TextView
+                android:id="@+id/hot_item_name_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/hot_item_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EARSCI.可爱马卡龙耳机"/>
+
+            <TextView
+                android:id="@+id/hot_item_price_tv"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="89.00"
+                android:textColor="@color/colorAccent"
+                android:layout_alignParentBottom="true"/>
+            <TextView
+                android:id="@+id/hot_item_like_tv"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.8k"
+                android:drawablePadding="5dp"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/ic_small_heart_normal"
+                android:textColor="#727272"
+                android:layout_alignParentBottom="true"/>
+            
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+</RelativeLayout>
